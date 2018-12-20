@@ -378,13 +378,13 @@ int cellular_command(_CALLBACKPTR_MDM cb, void* param, system_tick_t timeout_ms,
     const char * mdm_str = NULL;
     switch (result) {
         case AtResponse::OK:          mdm_type = TYPE_OK;         mdm_str = "\r\nOK\r\n";          break;
-        case AtResponse::BUSY:        mdm_type = TYPE_BUSY;       mdm_str = "\r\nERROR\r\n";       break;
-        case AtResponse::ERROR:       mdm_type = TYPE_ERROR;      mdm_str = "\r\nBUSY\r\n";        break;
-        case AtResponse::CME_ERROR:   mdm_type = TYPE_ERROR;      mdm_str = "\r\nNO ANSWER\r\n";   break;
-        case AtResponse::CMS_ERROR:   mdm_type = TYPE_ERROR;      mdm_str = "\r\nNO CARRIER\r\n";  break;
+        case AtResponse::BUSY:        mdm_type = TYPE_BUSY;       mdm_str = "\r\nBUSY\r\n";       break;
+        case AtResponse::ERROR:       mdm_type = TYPE_ERROR;      mdm_str = "\r\nERROR\r\n";        break;
+        case AtResponse::CME_ERROR:   mdm_type = TYPE_ERROR;      mdm_str = "\r\n+CME ERROR\r\n";   break;
+        case AtResponse::CMS_ERROR:   mdm_type = TYPE_ERROR;      mdm_str = "\r\n+CMS ERROR\r\n";  break;
         case AtResponse::NO_DIALTONE: mdm_type = TYPE_NODIALTONE; mdm_str = "\r\nNO DIALTONE\r\n"; break;
-        case AtResponse::NO_ANSWER:   mdm_type = TYPE_NOANSWER;   mdm_str = "\r\n+CME ERROR\r\n";  break;
-        case AtResponse::NO_CARRIER:  mdm_type = TYPE_NOCARRIER;  mdm_str = "\r\n+CMS ERROR\r\n";  break;
+        case AtResponse::NO_ANSWER:   mdm_type = TYPE_NOANSWER;   mdm_str = "\r\nNO ANSWER\r\n";  break;
+        case AtResponse::NO_CARRIER:  mdm_type = TYPE_NOCARRIER;  mdm_str = "\r\nNO CARRIER\r\n";  break;
     }
     if (cb) {
         cb(mdm_type, mdm_str, strlen(mdm_str)+1, param);
